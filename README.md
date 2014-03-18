@@ -14,8 +14,6 @@ Required dependancies
 * [Azure Mobile Service Client] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-get-started-data/)
 
 
-Install each dependancy to your AngularJS project.
-
 Add the Azure Mobile Service Client to your main index.html file 
 ```HTML
 <script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.2.min.js'></script>
