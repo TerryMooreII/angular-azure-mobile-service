@@ -25,7 +25,7 @@ After downloading the angular-azure-mobileservice to your AngularJS project then
 
 Add `'azure-mobile-service.module'` to your main angular.module like so
 ```javascript
-angular.module('myapp', ['myApp.controllers', 'myApp.services', 'wysiwyg.module']);
+angular.module('myapp', ['myApp.controllers', 'myApp.services', 'azure-mobile-service.module']);
 ````
 
 Update the API_URL and API_KEY which is located in the `angular-azure-mobile-service.js` file with your Azure account information.
@@ -35,7 +35,7 @@ How to use
 -------------
 Add the Azureservice as a dependacy to your controller like so:
 ```javascript
-angular.module('interviewApp')
+angular.module('myapp')
   .controller('MainCtrl', function ($scope, Azureservice) {
   ...
 })
@@ -43,7 +43,7 @@ angular.module('interviewApp')
 
 This will expose the following methods
 
-* Azureservice.query(tableName, parameters)
+* [Azureservice.query(tableName, parameters)] (#query)
 * Azureservice.getAll(tableName)
 * Azureservice.insert(tableName, obj)
 * Azureservice.update(tableName, obj)
@@ -53,7 +53,8 @@ This will expose the following methods
 * Azureservice.isLoggedIn()
 
 
-Azureservice.query(tableName, parameters)
+
+### <a id="query"></a> Azureservice.query(tableName, parameters)
 =================
 Query the Azure database
 
@@ -99,7 +100,7 @@ Azureservice.query('todoListTable', {})
 		$scope.items = items;
 		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
 	}, function(err){
-		console.error('There was an error quering Azure " + err;
+		console.error('There was an error quering Azure " + err);
 	})
 }    
 
@@ -118,7 +119,7 @@ Azureservice.query('todoListTable', {
 		$scope.items = items;
 		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
 	}, function(err){
-		console.error('There was an error quering Azure " + err;
+		console.error('There was an error quering Azure " + err);
 	})
 }    
 
@@ -146,7 +147,7 @@ Azureservice.query('todoListTable', {
 		$scope.items = items;
 		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
 	}, function(err){
-		console.error('There was an error quering Azure " + err;
+		console.error('There was an error quering Azure " + err);
 	})
 }    
 ```
@@ -177,7 +178,7 @@ Azureservice.query('todoListTable', {
 		$scope.items = items;
 		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
 	}, function(err){
-		console.error('There was an error quering Azure " + err;
+		console.error('There was an error quering Azure " + err);
 	})
 }    
 ```
@@ -199,7 +200,7 @@ Azureservice.query('todoListTable', {
 		$scope.items = items;
 		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
 	}, function(err){
-		console.error('There was an error quering Azure " + err;
+		console.error('There was an error quering Azure " + err);
 	})
 }    
 ```
@@ -239,7 +240,7 @@ Azureservice.insert('todoListTable', {
 	.done(function(){
 		console.log('Insert successful');
 	}, function(err){
-		console.error('Azure Error: " + err;
+		console.error('Azure Error: ' + err);
 	})
 }    
 ```
@@ -281,7 +282,7 @@ Azureservice.update('todoListTable', {
 	.done(function(){
 		console.log('Update successful');
 	}, function(err){
-		console.error('Azure Error: " + err;
+		console.error('Azure Error: ' + err);
 	})
 }    
 ```
@@ -306,7 +307,7 @@ The Azure table to delete from
 **obj** Required
 
 ```
-Javascript object containing the columns and values to udpate in to the database.  Must contain Azure ID column
+Javascript object containing the criteria for rows from the database. 
 ```
 
 Returns
@@ -322,14 +323,15 @@ Azureservice.delete('todoListTable', {
 	.done(function(){
 		console.log('Delete successful');
 	}, function(err){
-		console.error('Azure Error: " + err;
+		console.error('Azure Error: ' + err);
 	})
 }    
 ```
 
 Azureservice.getAll(tableName)
 =================
-Query all data from table.  Alias to Azureservice.query(tableName, {})
+Query all data from table.  
+Alias to Azureservice.query(tableName, {})
 
 Parameters:
 ---------------
@@ -352,7 +354,7 @@ Azureservice.getAll('todoListTable')
 		$scope.item = items;
 		$scope.apply(); //Important
 	}, function(err){
-		console.error('Azure Error: " + err;
+		console.error('Azure Error: ' + err);
 	})
 }    
 ```
@@ -361,7 +363,8 @@ Azureservice.getAll('todoListTable')
 Azureservice.login(oauthProvider)
 =================
 Login using the specified Oauth Provider.
-Users logins are currently session based.  This will change in the future.
+Users logins are currently session based.  This may change in the future.
+[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#caching)
 
 
 Parameters:
@@ -371,7 +374,6 @@ Parameters:
 ````
 The oauth provider
 Vaild options are 'google', 'twitter', 'facebook', 'windowsaccount', 'windowsazureactivedirectory'
-[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#caching)
 ```
 
 Returns
@@ -386,7 +388,7 @@ Azureservice.login('google')
 	.done(function(){
 		console.log('Login successful');
 	}, function(err){
-		console.error('Azure Error: " + err;
+		console.error('Azure Error: ' + err);
 	})
 }    
 ```
