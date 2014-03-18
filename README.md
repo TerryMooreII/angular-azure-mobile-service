@@ -43,18 +43,18 @@ angular.module('myapp')
 
 This will expose the following methods
 
-* [Azureservice.query(tableName, parameters)] (#query)
-* Azureservice.getAll(tableName)
-* Azureservice.insert(tableName, obj)
-* Azureservice.update(tableName, obj)
-* Azureservice.delete(tableName, obj)
-* Azureservice.login(oauthProvider)
-* Azureservice.logout()
-* Azureservice.isLoggedIn()
+* [Azureservice.query(tableName, parameters)] (https://github.com/TerryMooreII/angular-azure-mobile-service#-azureservicequerytablename-parameters)
+* [Azureservice.getAll(tableName)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
+* [Azureservice.insert(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
+* [Azureservice.update(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
+* [Azureservice.delete(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
+* [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
+* [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
+* [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
 
 
 
-### <a id="query"></a> Azureservice.query(tableName, parameters)
+Azureservice.query(tableName, parameters)
 =================
 Query the Azure database
 
