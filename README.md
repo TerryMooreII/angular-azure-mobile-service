@@ -84,7 +84,7 @@ The Azure table to query
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 Example:
 ---------
@@ -93,10 +93,10 @@ Note: The empty object is optional.
 
 ```javascript
 Azureservice.query('todoListTable', {})
-	.done(function(items){
+	.then(function(items){
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
-		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
+		
 	}, function(err){
 		console.error('There was an error quering Azure " + err);
 	})
@@ -112,10 +112,10 @@ Azureservice.query('todoListTable', {
  			isFinished:false
  		}
  	})
-	.done(function(items){
+	.then(function(items){
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
-		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
+		
 	}, function(err){
 		console.error('There was an error quering Azure " + err);
 	})
@@ -140,10 +140,10 @@ Azureservice.query('todoListTable', {
 	 		}
 	 	]
  	})
-	.done(function(items){
+	.then(function(items){
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
-		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
+		
 	}, function(err){
 		console.error('There was an error quering Azure " + err);
 	})
@@ -171,10 +171,10 @@ Azureservice.query('todoListTable', {
 	 	take: 25,
 	 	columns: ['name', 'isFinished']
  	})
-	.done(function(items){
+	.then(function(items){
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
-		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
+		
 	}, function(err){
 		console.error('There was an error quering Azure " + err);
 	})
@@ -193,10 +193,10 @@ Azureservice.query('todoListTable', {
  		},
  	params: ['terry']
  	})
-	.done(function(items){
+	.then(function(items){
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
-		$scope.$apply();  //IMPORTANT!!!! Because the response function is outside of $scope we have to do a $scope.apply to let Angular know that we have updated a scope variable
+		
 	}, function(err){
 		console.error('There was an error quering Azure " + err);
 	})
@@ -224,7 +224,7 @@ Javascript object containing the columns and values to insert in to the database
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 
 Example
@@ -235,7 +235,7 @@ Azureservice.insert('todoListTable', {
  		owner: 'Terry Moore',
  		isFinished: false
  	})
-	.done(function(){
+	.then(function(){
 		console.log('Insert successful');
 	}, function(err){
 		console.error('Azure Error: ' + err);
@@ -245,7 +245,7 @@ Azureservice.insert('todoListTable', {
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 
 Azureservice.update(tableName, obj)
@@ -268,7 +268,7 @@ Javascript object containing the columns and values to udpate in to the database
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 Example
 -------------
@@ -277,7 +277,7 @@ Azureservice.update('todoListTable', {
 		id: '5A25CD78-F2D9-413C-81CA-6EC090590AAF',
  		isFinished: true
  	})
-	.done(function(){
+	.then(function(){
 		console.log('Update successful');
 	}, function(err){
 		console.error('Azure Error: ' + err);
@@ -287,7 +287,7 @@ Azureservice.update('todoListTable', {
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 
 Azureservice.delete(tableName, obj)
@@ -310,7 +310,7 @@ Javascript object containing the criteria for rows from the database.
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 Example
 -------------
@@ -318,7 +318,7 @@ Example
 Azureservice.delete('todoListTable', {
 		id: '5A25CD78-F2D9-413C-81CA-6EC090590AAF'
  	})
-	.done(function(){
+	.then(function(){
 		console.log('Delete successful');
 	}, function(err){
 		console.error('Azure Error: ' + err);
@@ -341,13 +341,13 @@ The Azure table to delete from
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 Example
 -------------
 ```javascript
 Azureservice.getAll('todoListTable')
-	.done(function(items){
+	.then(function(items){
 		console.log('Query successful');
 		$scope.item = items;
 		$scope.apply(); //Important
@@ -376,14 +376,14 @@ Vaild options are 'google', 'twitter', 'facebook', 'windowsaccount', 'windowsazu
 
 Returns
 -----------
-Windows Azure Promise [See] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#promises)
+AngularJS Promise
 
 
 Example
 -------------
 ```javascript
 Azureservice.login('google')
-	.done(function(){
+	.then(function(){
 		console.log('Login successful');
 	}, function(err){
 		console.error('Azure Error: ' + err);

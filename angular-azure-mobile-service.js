@@ -1,222 +1,243 @@
+
 'use strict';
 
 angular.module('azure-mobile-service.module', [])
-  .service('Azureservice', function Azureservice() {
+  .service('Azureservice', function Azureservice($q) {
 
-	var API_URL = 'https://<AZURE_APP_NAME>.azure-mobile.net/';
+    var API_URL = 'https://<AZURE_APP_NAME>.azure-mobile.net/';
 	var API_KEY = '<AZURE_APP_API_KEY>';
-  	var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'windowsaccount', 'windowsazureactivedirectory'];
+    var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'windowsaccount', 'windowsazureactivedirectory'];
 
-	var MobileServiceClient = WindowsAzure.MobileServiceClient;
-	var client = new MobileServiceClient(API_URL, API_KEY);
+    var MobileServiceClient = WindowsAzure.MobileServiceClient;
+    var client = new MobileServiceClient(API_URL, API_KEY);
 
-  	
-	var getCachedUser = function(){
-		if (sessionStorage.loggedInUser)
-			client.currentUser = JSON.parse(sessionStorage.loggedInUser);
-	}
+    
+    var getCachedUser = function(){
+        if (sessionStorage.loggedInUser){
+            client.currentUser = JSON.parse(sessionStorage.loggedInUser);
+        }
+    };
 
-	getCachedUser();
+    getCachedUser();
 
-	var getTable = function(tableName){
-		return client.getTable(tableName);
-	}
+    var getTable = function(tableName){
+        return client.getTable(tableName);
+    };
 
-	var isUndefinedOrNotAnObjectOrFunction = function(obj){
-		return typeof obj === "undefined" || (typeof obj !== 'object' && typeof obj !== 'function');
-	}
+    var isUndefinedOrNotAnObjectOrFunction = function(obj){
+        return typeof obj === 'undefined' || (typeof obj !== 'object' && typeof obj !== 'function');
+    };
 
-	var isUndefinedOrNotAnObject = function(obj){
-		return typeof obj === "undefined" || (typeof obj !== 'object');
-	}
+    var isUndefinedOrNotAnObject = function(obj){
+        return typeof obj === 'undefined' || (typeof obj !== 'object');
+    };
 
-	var isNullOrUndefined = function(value){
-		return value === null || typeof value === "undefined";
-	}
-	var isNotNullOrUndefined = function(value){
-		return !isNullOrUndefined(value);
-	}
+    var isNullOrUndefined = function(value){
+        return value === null || typeof value === 'undefined';
+    };
+    var isNotNullOrUndefined = function(value){
+        return !isNullOrUndefined(value);
+    };
 
-	return{
-		/*
-			The query method will create and return an azure query.
+    //This will accept the Azure promise and turn it into a angular promise.
+    //Elimiante the need for $scope.$apply in your controller.
+    var wrapAzurePromiseWithAngularPromise = function(azurePromise){
+        var deferred = $q.defer();
 
-			@param string tableName               	   REQUIRED The name of the table to query
-			@param object obj 
-				@param obj or function criteria		   The search object or a function to filter
-														If function then it must be an OData predicate.
-				@param array params		  			   Array of parameters to pass the criteria function
-				@param array columns				   Array of column names to return
-				@param int take 					   Number of results to return
-				@param int skip						   Number of reuslts to skip over
-				@param array orderBy				   Array of objects
-					@param string column			   Column name to sort by
-					@param string asc || desc 		   Direction to sort
+        azurePromise
+            .done(function(items){
+                deferred.resolve(items);
+            },
+            function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    };
 
-     		@return promise               Returns a WindowsAzure promise
-		*/
-		query: function(tableName, obj){
-			var data = null;
+    return{
+        /*
+            The query method will create and return an azure query.
 
-			if (tableName === undefined){
-				console.error('Azureservice.query: You must specify a table name');
-				return null;
-			}
+            @param string tableName                      REQUIRED The name of the table to query
+            @param object obj 
+                @param obj or function criteria          The search object or a function to filter
+                                                         If function then it must be an OData predicate.
+                @param array params                      Array of parameters to pass the criteria function
+                @param array columns                     Array of column names to return
+                @param int take                          Number of results to return
+                @param int skip                          Number of reuslts to skip over
+                @param array orderBy                     Array of objects
+                    @param string column                 Column name to sort by
+                    @param string direction              Direction to sort asc || desc         
 
-			if (angular.isDefined(obj) && angular.isObject(obj)){
-				
-	  			if (isUndefinedOrNotAnObjectOrFunction(obj.criteria))
-	  				obj.criteria = {};
-	  			
-				data = getTable(tableName).where(obj.criteria, obj.params);
+            @return promise               Returns a AngularJS promise
+        */
+        query: function(tableName, obj){
+            
+            var data = null;
 
-				//Number of results to return
-				if (isNotNullOrUndefined(obj.take) && angular.isNumber(obj.take))
-					data = data.take(obj.take);
-				
-				//number of results to skip
-				if (isNotNullOrUndefined(obj.skip) && angular.isNumber(obj.take))
-					data = data.skip(obj.skip);
+            if (tableName === undefined){
+                console.error('Azureservice.query: You must specify a table name');
+                return null;
+            }
 
-	    		//How to sort/order the data
-				if (angular.isDefined(obj.orderBy) && angular.isArray(obj.orderBy)){
-					var orderBy = obj.orderBy;
+            if (angular.isDefined(obj) && angular.isObject(obj)){
+                
+                if (isUndefinedOrNotAnObjectOrFunction(obj.criteria)){
+                    obj.criteria = {};
+                }
+                
+                data = getTable(tableName).where(obj.criteria, obj.params);
 
-					for (var i=0; i < orderBy.length; i++){
-						var column = orderBy[i].column;
-						var dir = orderBy[i].direction;
+                //Number of results to return
+                if (isNotNullOrUndefined(obj.take) && angular.isNumber(obj.take)){
+                    data = data.take(obj.take);
+                }
+                
+                //number of results to skip
+                if (isNotNullOrUndefined(obj.skip) && angular.isNumber(obj.take)){
+                    data = data.skip(obj.skip);
+                }
 
-						if (angular.isDefined(column)){
-							if (angular.isDefined(dir) && dir.toLowerCase() === 'desc')
-								data = data.orderByDescending(column);
-							else if (angular.isDefined(column))
-								data = data.orderBy(column);
-						}
-					}
-				}
+                //How to sort/order the data
+                if (angular.isDefined(obj.orderBy) && angular.isArray(obj.orderBy)){
+                    var orderBy = obj.orderBy;
 
-	    		//Return listed columns
-				if (angular.isDefined(obj.columns) && angular.isArray(obj.columns)){
-					data = data.select(obj.columns.join())
-				}
-			
-	  		}else {
-	       		//No criteria specified - get everything - Note azure limits the count of returned items see docs.
-	  			data = getTable(tableName).where({});
-	  		}
+                    for (var i=0; i < orderBy.length; i++){
+                        var column = orderBy[i].column;
+                        var dir = orderBy[i].direction;
 
-	    	return data.includeTotalCount().read();
-		},
+                        if (angular.isDefined(column)){
+                            if (angular.isDefined(dir) && dir.toLowerCase() === 'desc'){
+                                data = data.orderByDescending(column);
+                            }else if (angular.isDefined(column)){
+                                data = data.orderBy(column);
+                            }
+                        }
+                    }
+                }
 
-	    /*
-	      Alias to .query(tableName) 
-	      Returns all results
-	    */
-	    getAll: function(tableName){
-	      return this.query(tableName);
-	    },
+                //Return listed columns
+                if (angular.isDefined(obj.columns) && angular.isArray(obj.columns)){
+                    data = data.select(obj.columns.join());
+                }
+            
+            }else {
+                //No criteria specified - get everything - Note azure limits the count of returned items see docs.
+                data = getTable(tableName).where({});
+            }
 
-	    /*
-	      Insert row in to Azure
+            return wrapAzurePromiseWithAngularPromise(data.includeTotalCount().read());
+        },
 
-	      @param string tableName       REQUIRED The name of the table to query
-	      @param object obj        		REQUIRED A JSON object of data to insert into the database
-	      @return promise               Returns a WindowsAzure promise
-	    */
+        /*
+          Alias to .query(tableName) 
+          Returns all results
+        */
+        getAll: function(tableName){
+            return this.query(tableName);
+        },
 
-		insert: function(tableName, obj){
-		if (tableName === undefined){
-				console.error('Azureservice.insert: You must specify a table name');
-				return null;
-			}
+        /*
+          Insert row in to Azure
 
-			if (isUndefinedOrNotAnObject(obj)){
-				console.error('Azureservice.insert: You must specify the insert object');
-				return null;
-			}  			
+          @param string tableName       REQUIRED The name of the table to query
+          @param object obj             REQUIRED A JSON object of data to insert into the database
+          @return promise               Returns a AngularJS promise
+        */
 
-			return getTable(tableName).insert(obj);
-		},
+        insert: function(tableName, obj){
+            if (tableName === undefined){
+                console.error('Azureservice.insert: You must specify a table name');
+                return null;
+            }
 
-	    /*
-	      Update row in Azure
+            if (isUndefinedOrNotAnObject(obj)){
+                console.error('Azureservice.insert: You must specify the insert object');
+                return null;
+            }
 
-	      @param string tableName       REQUIRED The name of the table to query
-	      @param object obj        		REQUIRED A JSON object of data to update into the database
-	      @return promise               Returns a WindowsAzure promise
-	    */
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName).insert(obj));
+        },
 
-		update: function(tableName, obj){
-		if (tableName === undefined){
-				console.error('Azureservice.update: You must specify a table name');
-				return null;
-			}
+        /*
+          Update row in Azure
 
-			if (isUndefinedOrNotAnObject(obj)){
-				console.error('Azureservice.update: You must specify the insert object');
-				return null;
-			}  			
+          @param string tableName       REQUIRED The name of the table to query
+          @param object obj             REQUIRED A JSON object of data to update into the database
+          @return promise               Returns a AngularJS promise
+        */
 
-			return getTable(tableName).update(obj);
-		},
+        update: function(tableName, obj){
+            if (tableName === undefined){
+                console.error('Azureservice.update: You must specify a table name');
+                return null;
+            }
 
-	    /*
-	      Delete row(s) from Azure 
+            if (isUndefinedOrNotAnObject(obj)){
+                console.error('Azureservice.update: You must specify the insert object');
+                return null;
+            }
 
-	      @param string tableName       REQUIRED The name of the table to query
-	      @param object obj        		REQUIRED A JSON object of data to query for deletion from the database
-	      @return promise               Returns a WindowsAzure promise
-	    */
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName).update(obj));
+        },
 
-		del: function(tableName, obj){
-			if (tableName === undefined){
-				console.error('Azureservice.del: You must specify a table name');
-				return null;
-			}
+        /*
+          Delete row(s) from Azure 
 
-			if (isUndefinedOrNotAnObject(obj)){
-				console.error('Azureservice.del: You must specify the insert object');
-				return null;
-			}  			
+          @param string tableName       REQUIRED The name of the table to query
+          @param object obj             REQUIRED A JSON object of data to query for deletion from the database
+          @return promise               Returns a AngularJS promise
+        */
 
-			return getTable(tableName).del(obj);
-		},
+        del: function(tableName, obj){
+            if (tableName === undefined){
+                console.error('Azureservice.del: You must specify a table name');
+                return null;
+            }
 
-	    /*
-	      Logs a user into the oauthProvider service using Windows Azure
-	      Stores the data in sessionStorage for future queries
-	    
-	      @param  string oauthProvider  REQUIRED pass in an oauth provider
-	      @return promise               Returns a WindowsAzure promise
-	    */
+            if (isUndefinedOrNotAnObject(obj)){
+                console.error('Azureservice.del: You must specify the insert object');
+                return null;
+            }
 
-		login: function(oauthProvider){
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName).del(obj));
+        },
 
-			if (!angular.isDefined(oauthProvider) || VAILD_OAUTH_PROVIDERS.indexOf(oauthProvider) === -1){
-				throw new Error('Azureservice.login Invalid or no oauth provider listed.')
-				return null;
-			}
+        /*
+          Logs a user into the oauthProvider service using Windows Azure
+          Stores the data in sessionStorage for future queries
+        
+          @param  string oauthProvider  REQUIRED pass in an oauth provider
+          @return promise               Returns a AngularJS promise
+        */
 
-			var promise = client.login(oauthProvider).then(function(id){
-				//cache login 
- 			   sessionStorage.loggedInUser = JSON.stringify(client.currentUser);	
-			});
-			
-			return promise;
-		}, 
-	    /*
-	      Logs a user out 
-	    */
+        login: function(oauthProvider){
 
-		logout: function(){
-			//clear cache
-			sessionStorage.loggedInUser = null;
-			client.logout();
-		},
-		
-		isLoggedIn: function(){
-			return isNotNullOrUndefined(client.currentUser)  && isNotNullOrUndefined(sessionStorage.loggedInUser);
-		}
-	}
+            if (!angular.isDefined(oauthProvider) || VAILD_OAUTH_PROVIDERS.indexOf(oauthProvider) === -1){
+                throw new Error('Azureservice.login Invalid or no oauth provider listed.');
+            }
+
+            var promise = client.login(oauthProvider).then(function(){
+                //cache login 
+                sessionStorage.loggedInUser = JSON.stringify(client.currentUser);
+            });
+            
+            return wrapAzurePromiseWithAngularPromise(promise);
+        },
+        /*
+          Logs a user out 
+        */
+
+        logout: function(){
+            //clear cache
+            sessionStorage.loggedInUser = null;
+            client.logout();
+        },
+        
+        isLoggedIn: function(){
+            return isNotNullOrUndefined(client.currentUser)  && isNotNullOrUndefined(sessionStorage.loggedInUser);
+        }
+    };
 
 });
