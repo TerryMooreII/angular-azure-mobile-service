@@ -237,7 +237,53 @@ angular.module('azure-mobile-service.module', [])
         
         isLoggedIn: function(){
             return isNotNullOrUndefined(client.currentUser)  && isNotNullOrUndefined(sessionStorage.loggedInUser);
+        }, 
+
+        /*
+            @param string name          the custom api name
+            @param object options    
+                @param string method        required get, post, put, delete
+                @param object body          key/value to send in the request body
+                @param object headers       key value  to send in the headers
+                @param object parameters    key/value to send as parameters          
+
+        */
+
+        invokeApi: function(name, options){
+
+            var deferred = $q.defer();
+
+            var validMethods = ['get', 'post', 'put', 'delete'];
+
+            if (isNullOrUndefined(name)){
+                console.error('Azureservice.invokeApi No custom api name specified');
+                return null;
+            }
+
+            if (isUndefinedOrNotAnObject(options)){
+                options = {
+                    method: 'get'
+                }
+            }else if (isNullOrUndefined(options.method)){
+                options.method = 'get'
+            }else if (validMethods.indexOf(options.method.toLowerCase()) === -1 ){
+                console.error('Azureservice.invokeApi Invalid method type');
+                return null;
+            }
+            
+
+            client
+                .invokeApi(name, options)
+                .done(function(results){   
+                    deferred.resolve(results.result);
+                },
+                function(err){
+                    deferred.reject(err);
+                });
+
+            return deferred.promise;
         }
+
     };
 
 });

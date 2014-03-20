@@ -49,6 +49,7 @@ This will expose the following methods
 * [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
 * [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
+* [Azureservice.invokeApi()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
 
 
 
@@ -392,7 +393,7 @@ Azureservice.login('google')
 ```
 
 
-Azureservice.login(oauthProvider)
+Azureservice.logout()
 =================
 Logs out the current user.
 
@@ -434,6 +435,59 @@ Azureservice.isLoggedIn();
 ```
 
 
+Azureservice.invokeApi(name, params)
+=================
+Invoke a Azure Mobile service custom api call
+[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-windows-store-javascript-call-custom-api/)
+If this response from the api is not a status code 200 then it tigger the error function.
+
+Parameters:
+---------------
+**name** Required
+
+````
+The custom API name
+```
+
+**params** 
+
+````
+An object that contains a set of parameters to send the custom api.
+If no parameters object is set then it will default to calling the api with a GET method.
+
+{
+	method 			//String The method to call the api with. Valid options areget, post, put, delete
+	body 			//Object of key/values pairs of data to send the request body
+	parameters 		//Object of key/values pairs of data to send the query parameters
+	headers			//Object of key/values pairs of data to send in the reqeust headers
+}
+```
+
+Returns
+-----------
+AngularJS Promise
+
+
+
+Example
+-------------
+```javascript
+Azureservice.invokeApi('apiName'{
+		method: 'get',
+		parameters: {
+			...
+		}
+	})
+	.then(function(response){
+		console.log('Here is my response object');
+		console.log(response)
+	}, function(err){
+		console.error('Azure Error: ' + err);
+	})
+}    
+```
+
+
 For more information see the Microsoft Azure Mobile Service Documentation
 
-[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)
+[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)	
