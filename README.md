@@ -49,7 +49,7 @@ This will expose the following methods
 * [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
 * [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
-* [Azureservice.invokeApi()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
+* [Azureservice.invokeApi()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinvokeapiname-params)
 
 
 
