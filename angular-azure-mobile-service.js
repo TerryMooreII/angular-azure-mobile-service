@@ -1,11 +1,10 @@
-
 'use strict';
 
 angular.module('azure-mobile-service.module', [])
   .service('Azureservice', function Azureservice($q) {
 
-    var API_URL = 'https://<AZURE_APP_NAME>.azure-mobile.net/';
-	var API_KEY = '<AZURE_APP_API_KEY>';
+    var API_URL = 'https://interview.azure-mobile.net/';
+    var API_KEY = 'oovUtJxhEBFNuVIPNWlBZAfgmITnuw34';
     var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'windowsaccount', 'windowsazureactivedirectory'];
 
     var MobileServiceClient = WindowsAzure.MobileServiceClient;
@@ -29,7 +28,7 @@ angular.module('azure-mobile-service.module', [])
     };
 
     var isUndefinedOrNotAnObject = function(obj){
-        return typeof obj === 'undefined' || (typeof obj !== 'object');
+        return isNullOrUndefined(obj) || (typeof obj !== 'object');
     };
 
     var isNullOrUndefined = function(value){
@@ -70,13 +69,13 @@ angular.module('azure-mobile-service.module', [])
                     @param string column                 Column name to sort by
                     @param string direction              Direction to sort asc || desc         
 
-            @return promise               Returns a AngularJS promise
+            @return promise               Returns a WindowsAzure promise
         */
         query: function(tableName, obj){
             
             var data = null;
 
-            if (tableName === undefined){
+            if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.query: You must specify a table name');
                 return null;
             }
@@ -143,11 +142,11 @@ angular.module('azure-mobile-service.module', [])
 
           @param string tableName       REQUIRED The name of the table to query
           @param object obj             REQUIRED A JSON object of data to insert into the database
-          @return promise               Returns a AngularJS promise
+          @return promise               Returns a WindowsAzure promise
         */
 
         insert: function(tableName, obj){
-            if (tableName === undefined){
+            if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.insert: You must specify a table name');
                 return null;
             }
@@ -165,11 +164,11 @@ angular.module('azure-mobile-service.module', [])
 
           @param string tableName       REQUIRED The name of the table to query
           @param object obj             REQUIRED A JSON object of data to update into the database
-          @return promise               Returns a AngularJS promise
+          @return promise               Returns a WindowsAzure promise
         */
 
         update: function(tableName, obj){
-            if (tableName === undefined){
+            if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.update: You must specify a table name');
                 return null;
             }
@@ -187,11 +186,11 @@ angular.module('azure-mobile-service.module', [])
 
           @param string tableName       REQUIRED The name of the table to query
           @param object obj             REQUIRED A JSON object of data to query for deletion from the database
-          @return promise               Returns a AngularJS promise
+          @return promise               Returns a WindowsAzure promise
         */
 
         del: function(tableName, obj){
-            if (tableName === undefined){
+            if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.del: You must specify a table name');
                 return null;
             }
@@ -209,7 +208,7 @@ angular.module('azure-mobile-service.module', [])
           Stores the data in sessionStorage for future queries
         
           @param  string oauthProvider  REQUIRED pass in an oauth provider
-          @return promise               Returns a AngularJS promise
+          @return promise               Returns a WindowsAzure promise
         */
 
         login: function(oauthProvider){
@@ -283,7 +282,6 @@ angular.module('azure-mobile-service.module', [])
 
             return deferred.promise;
         }
-
     };
 
 });
