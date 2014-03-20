@@ -3,9 +3,7 @@ angular-azure-mobile-service
 
 An AngularJS service for the Azure Mobile Service Client.
 
-This support simple and complex queries, inserts, updates, deletes, and login/logout.
-
-The login function currently stores the authentication token in the sessionStorage and will required users to reauthenticate if they close the page.  This may get updated to use the angular $cookiestore in the future. 
+This support simple and complex queries, inserts, updates, deletes.  Supports login and logout of Azure authentication identies such as google, twitter, facebook, and windows live.  Also supports invoking your custom azure api calls. 
 
 
 Required dependancies
@@ -14,19 +12,19 @@ Required dependancies
 * [Azure Mobile Service Client] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-get-started-data/)
 
 
-Add the Azure Mobile Service Client to your main index.html file 
+Add the Azure Mobile Service Client to your index.html file 
 ```HTML
 <script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.2.min.js'></script>
 ```
 
-After downloading the angular-azure-mobileservice to your AngularJS project then
+After downloading the `angular-azure-mobile-service.js` to your AngularJS project then
 
 Add `'azure-mobile-service.module'` to your main angular.module like so
 ```javascript
 angular.module('myapp', ['myApp.controllers', 'myApp.services', 'azure-mobile-service.module']);
 ````
 
-Update the API_URL and API_KEY which is located in the `angular-azure-mobile-service.js` file with your Azure account information.
+Update the API_URL and API_KEY variables located in the  `angular-azure-mobile-service.js` file with your Azure account information.
 
 
 How to use
@@ -437,9 +435,11 @@ Azureservice.isLoggedIn();
 
 Azureservice.invokeApi(name, params)
 =================
-Invoke a Azure Mobile service custom api call
+Invoke a Azure Mobile service custom api call.
+
 [More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-windows-store-javascript-call-custom-api/)
-If this response from the api is not a status code 200 then it tigger the error function.
+
+If this response from the api is not a status code 200 then it trigger the error function.
 
 Parameters:
 ---------------
@@ -453,10 +453,11 @@ The custom API name
 
 ````
 An object that contains a set of parameters to send the custom api.
-If no parameters object is set then it will default to calling the api with a GET method.
+If no params object is set then it will default to calling the api with a GET method.
 
+Valid options to set in the params object:
 {
-	method 			//String The method to call the api with. Valid options areget, post, put, delete
+	method 			//String The method to call the api with. Valid options are get, post, put, delete
 	body 			//Object of key/values pairs of data to send the request body
 	parameters 		//Object of key/values pairs of data to send the query parameters
 	headers			//Object of key/values pairs of data to send in the reqeust headers
@@ -474,7 +475,7 @@ Example
 ```javascript
 Azureservice.invokeApi('apiName'{
 		method: 'get',
-		parameters: {
+		body: {
 			...
 		}
 	})
@@ -488,6 +489,9 @@ Azureservice.invokeApi('apiName'{
 ```
 
 
-For more information see the Microsoft Azure Mobile Service Documentation
 
+
+
+For more information on Windows Azure Mobile service please refer to the Microsoft Azure Mobile Service Documentation
+--------
 [More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)	
