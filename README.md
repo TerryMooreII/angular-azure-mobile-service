@@ -492,4 +492,4 @@ Azureservice.invokeApi('apiName'{
 
 
 
-***For more information on Windows Azure Mobile service please refer to the *** [Microsoft Azure Mobile Service Documentation] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)	
+***For more information on Windows Azure Mobile service please refer to the*** [Microsoft Azure Mobile Service Documentation] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)	
