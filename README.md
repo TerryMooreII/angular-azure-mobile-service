@@ -365,14 +365,13 @@ Parameters:
 **tableName** Required
 
 ````
-The Azure table to delete from
+The Azure table to query from
 ```
 
 **id** Required
 
 ```
 The row id
-
 ```
 
 Returns
