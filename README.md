@@ -41,6 +41,7 @@ This will expose the following methods
 
 * [Azureservice.query(tableName, parameters)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters)
 * [Azureservice.getAll(tableName)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
+* [Azureservice.getById(tableName, id)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
 * [Azureservice.insert(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
 * [Azureservice.update(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
 * [Azureservice.delete(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
@@ -335,7 +336,7 @@ Parameters:
 **tableName** Required
 
 ````
-The Azure table to delete from
+The Azure table to get all data from
 ```
 
 Returns
@@ -349,7 +350,42 @@ Azureservice.getAll('todoListTable')
 	.then(function(items){
 		console.log('Query successful');
 		$scope.item = items;
-		$scope.apply(); //Important
+	}, function(err){
+		console.error('Azure Error: ' + err);
+	})
+}    
+```
+
+Azureservice.getById(tableName, id)
+=================
+Get item from database by id
+
+Parameters:
+---------------
+**tableName** Required
+
+````
+The Azure table to delete from
+```
+
+**id** Required
+
+```
+The row id
+
+```
+
+Returns
+-----------
+AngularJS Promise
+
+Example
+-------------
+```javascript
+Azureservice.getById('todoListTable', '5A25CD78-F2D9-413C-81CA-6EC090590AAF')
+	.then(function(item){
+		console.log('Query successful');
+		$scope.item = item;
 	}, function(err){
 		console.error('Azure Error: ' + err);
 	})

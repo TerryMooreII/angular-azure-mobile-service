@@ -130,6 +130,27 @@ angular.module('azure-mobile-service.module', [])
         },
 
         /*
+         Get single item in Azure
+
+         @param string tableName       REQUIRED The name of the table to query
+         @param string id              REQUIRED String id of the item to get
+         @return promise               Returns a WindowsAzure promise
+         */
+        getById: function (tableName, id) {
+            if (isNullOrUndefined(tableName)) {
+                console.error('Azureservice.getById: You must specify a table name');
+                return null;
+            }
+
+            if (isNullOrUndefined(id)) {
+                console.error('Azureservice.getById: You must specify the id');
+                return null;
+            }
+
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName).lookup(id));
+        }, 
+
+        /*
           Alias to .query(tableName) 
           Returns all results
         */
