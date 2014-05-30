@@ -41,7 +41,7 @@ This will expose the following methods
 
 * [Azureservice.query(tableName, parameters)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters)
 * [Azureservice.getAll(tableName)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
-* [Azureservice.getById(tableName, id)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
+* [Azureservice.getById(tableName, id)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id)
 * [Azureservice.insert(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
 * [Azureservice.update(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
 * [Azureservice.delete(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
