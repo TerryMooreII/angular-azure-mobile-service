@@ -1,0 +1,11 @@
+{
+  "author": "Terry Moore II",
+  "name": "angular-azure-mobile-service",
+  "description": "Angular Azure Mobile Service",
+  "version": "1.0.0",
+  "homepage": "https://github.com/TerryMooreII/angular-azure-mobile-service.git",
+  "main": "./angular-azure-mobile-service.js",
+  "dependencies": {
+    "angular": ">= 1.0.0"
+  }
+}
