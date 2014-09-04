@@ -19,7 +19,11 @@ angular.module('azure-mobile-service.module', [])
 
     getCachedUser();
 
-    var getTable = function(tableName){
+    var getTable = function(tableName, withFilterFn){
+        
+        if (typeof withFilterFn === 'function')
+            return client.withFilter(withFilterFn).getTable(tableName);
+
         return client.getTable(tableName);
     };
 
@@ -71,7 +75,7 @@ angular.module('azure-mobile-service.module', [])
 
             @return promise               Returns a WindowsAzure promise
         */
-        query: function(tableName, obj){
+        query: function(tableName, obj, withFilterFn){
             
             var data = null;
 
@@ -86,7 +90,7 @@ angular.module('azure-mobile-service.module', [])
                     obj.criteria = {};
                 }
                 
-                data = getTable(tableName).where(obj.criteria, obj.params);
+                data = getTable(tableName, withFilterFn).where(obj.criteria, obj.params);
 
                 //Number of results to return
                 if (isNotNullOrUndefined(obj.take) && angular.isNumber(obj.take)){
@@ -123,7 +127,7 @@ angular.module('azure-mobile-service.module', [])
             
             }else {
                 //No criteria specified - get everything - Note azure limits the count of returned items see docs.
-                data = getTable(tableName).where({});
+                data = getTable(tableName, withFilterFn).where({});
             }
 
             return wrapAzurePromiseWithAngularPromise(data.includeTotalCount().read());
@@ -136,7 +140,7 @@ angular.module('azure-mobile-service.module', [])
          @param string id              REQUIRED String id of the item to get
          @return promise               Returns a WindowsAzure promise
          */
-        getById: function (tableName, id) {
+        getById: function (tableName, id, withFilterFn) {
             if (isNullOrUndefined(tableName)) {
                 console.error('Azureservice.getById: You must specify a table name');
                 return null;
@@ -147,15 +151,15 @@ angular.module('azure-mobile-service.module', [])
                 return null;
             }
 
-            return wrapAzurePromiseWithAngularPromise(getTable(tableName).lookup(id));
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName, withFilterFn).lookup(id));
         }, 
 
         /*
           Alias to .query(tableName) 
           Returns all results
         */
-        getAll: function(tableName){
-            return this.query(tableName);
+        getAll: function(tableName, withFilterFn){
+            return this.query(tableName, null, withFilterFn);
         },
 
         /*
@@ -166,7 +170,7 @@ angular.module('azure-mobile-service.module', [])
           @return promise               Returns a WindowsAzure promise
         */
 
-        insert: function(tableName, obj){
+        insert: function(tableName, obj, withFilterFn){
             if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.insert: You must specify a table name');
                 return null;
@@ -177,7 +181,7 @@ angular.module('azure-mobile-service.module', [])
                 return null;
             }
 
-            return wrapAzurePromiseWithAngularPromise(getTable(tableName).insert(obj));
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName, withFilterFn).insert(obj));
         },
 
         /*
@@ -188,7 +192,7 @@ angular.module('azure-mobile-service.module', [])
           @return promise               Returns a WindowsAzure promise
         */
 
-        update: function(tableName, obj){
+        update: function(tableName, obj, withFilterFn){
             if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.update: You must specify a table name');
                 return null;
@@ -199,7 +203,7 @@ angular.module('azure-mobile-service.module', [])
                 return null;
             }
 
-            return wrapAzurePromiseWithAngularPromise(getTable(tableName).update(obj));
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName, withFilterFn).update(obj));
         },
 
         /*
@@ -210,7 +214,7 @@ angular.module('azure-mobile-service.module', [])
           @return promise               Returns a WindowsAzure promise
         */
 
-        del: function(tableName, obj){
+        del: function(tableName, obj, withFilterFn){
             if (isNullOrUndefined(tableName)){
                 console.error('Azureservice.del: You must specify a table name');
                 return null;
@@ -221,7 +225,7 @@ angular.module('azure-mobile-service.module', [])
                 return null;
             }
 
-            return wrapAzurePromiseWithAngularPromise(getTable(tableName).del(obj));
+            return wrapAzurePromiseWithAngularPromise(getTable(tableName, withFilterFn).del(obj));
         },
 
         /*
