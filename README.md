@@ -90,10 +90,10 @@ The Azure table to query
 [More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#querying) about what each parameter does 
 
 
-**withFilterFn** Optional
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+A function that can read and write arbitrary properties or add additional headers to the request 
 ```
 
 Returns
@@ -236,10 +236,10 @@ The Azure table to insert to
 Javascript object containing the columns and values to insert in to the database
 ```
 
-**withFilterFn** Optional
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+A function that can read and write arbitrary properties or add additional headers to the request 
 ```
 
 Returns
@@ -286,10 +286,10 @@ The Azure table to update
 Javascript object containing the columns and values to udpate in to the database.  Must contain Azure ID column
 ```
 
-**withFilterFn** Optional
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+A function that can read and write arbitrary properties or add additional headers to the request 
 ```
 
 Returns
@@ -335,10 +335,10 @@ Javascript object containing the criteria for rows from the database.
 ```
 
 
-**withFilterFn** Optional
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+A function that can read and write arbitrary properties or add additional headers to the request 
 ```
 
 Returns
@@ -373,10 +373,10 @@ The Azure table to get all data from
 ```
 
 
-**withFilterFn** Optional
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+A function that can read and write arbitrary properties or add additional headers to the request  
 ```
 
 Returns
@@ -415,10 +415,10 @@ The row id
 ```
 
 
-**withFilterFn** Optional
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+A function that can read and write arbitrary properties or add additional headers to the request  
 ```
 
 Returns
