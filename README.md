@@ -58,7 +58,7 @@ This will expose the following methods
 
 
 
-Azureservice.query(tableName, parameters)
+Azureservice.query(tableName, parameters, withFilterFn)
 =================
 Query the Azure database
 
@@ -86,7 +86,15 @@ The Azure table to query
 		direction      //Direction to sort : asc || desc	
 }
 ```
+
 [More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#querying) about what each parameter does 
+
+
+**withFilterFn** Optional
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+```
 
 Returns
 -----------
@@ -210,7 +218,7 @@ Azureservice.query('todoListTable', {
 ```
 
 
-Azureservice.insert(tableName, obj)
+Azureservice.insert(tableName, obj, withFilterFn)
 =================
 Insert data into the Azure database
 
@@ -226,6 +234,12 @@ The Azure table to insert to
 
 ```
 Javascript object containing the columns and values to insert in to the database
+```
+
+**withFilterFn** Optional
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 ```
 
 Returns
@@ -254,7 +268,7 @@ Returns
 AngularJS Promise
 
 
-Azureservice.update(tableName, obj)
+Azureservice.update(tableName, obj, withFilterFn)
 =================
 Query the Azure database
 
@@ -270,6 +284,12 @@ The Azure table to update
 
 ```
 Javascript object containing the columns and values to udpate in to the database.  Must contain Azure ID column
+```
+
+**withFilterFn** Optional
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 ```
 
 Returns
@@ -296,7 +316,7 @@ Returns
 AngularJS Promise
 
 
-Azureservice.delete(tableName, obj)
+Azureservice.delete(tableName, obj, withFilterFn)
 =================
 Delete from the Azure database
 
@@ -312,6 +332,13 @@ The Azure table to delete from
 
 ```
 Javascript object containing the criteria for rows from the database. 
+```
+
+
+**withFilterFn** Optional
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 ```
 
 Returns
@@ -332,7 +359,7 @@ Azureservice.delete('todoListTable', {
 }    
 ```
 
-Azureservice.getAll(tableName)
+Azureservice.getAll(tableName, withFilterFn)
 =================
 Query all data from table.  
 Alias to Azureservice.query(tableName, {})
@@ -343,6 +370,13 @@ Parameters:
 
 ````
 The Azure table to get all data from
+```
+
+
+**withFilterFn** Optional
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 ```
 
 Returns
@@ -362,7 +396,7 @@ Azureservice.getAll('todoListTable')
 }    
 ```
 
-Azureservice.getById(tableName, id)
+Azureservice.getById(tableName, id, withFilterFn)
 =================
 Get item from database by id
 
@@ -378,6 +412,13 @@ The Azure table to query from
 
 ```
 The row id
+```
+
+
+**withFilterFn** Optional
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 ```
 
 Returns

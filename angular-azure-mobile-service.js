@@ -72,7 +72,7 @@ angular.module('azure-mobile-service.module', [])
                 @param array orderBy                     Array of objects
                     @param string column                 Column name to sort by
                     @param string direction              Direction to sort asc || desc         
-
+            @param function withFilterFn                 OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
             @return promise               Returns a WindowsAzure promise
         */
         query: function(tableName, obj, withFilterFn){
@@ -138,6 +138,7 @@ angular.module('azure-mobile-service.module', [])
 
          @param string tableName       REQUIRED The name of the table to query
          @param string id              REQUIRED String id of the item to get
+         @param function withFilterFn  OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
          @return promise               Returns a WindowsAzure promise
          */
         getById: function (tableName, id, withFilterFn) {
@@ -155,7 +156,7 @@ angular.module('azure-mobile-service.module', [])
         }, 
 
         /*
-          Alias to .query(tableName) 
+          Alias to .query(tableName, null, withFilterFn) 
           Returns all results
         */
         getAll: function(tableName, withFilterFn){
@@ -167,6 +168,7 @@ angular.module('azure-mobile-service.module', [])
 
           @param string tableName       REQUIRED The name of the table to query
           @param object obj             REQUIRED A JSON object of data to insert into the database
+          @param function withFilterFn  OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
           @return promise               Returns a WindowsAzure promise
         */
 
@@ -189,6 +191,7 @@ angular.module('azure-mobile-service.module', [])
 
           @param string tableName       REQUIRED The name of the table to query
           @param object obj             REQUIRED A JSON object of data to update into the database
+          @param function withFilterFn  OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
           @return promise               Returns a WindowsAzure promise
         */
 
@@ -211,6 +214,7 @@ angular.module('azure-mobile-service.module', [])
 
           @param string tableName       REQUIRED The name of the table to query
           @param object obj             REQUIRED A JSON object of data to query for deletion from the database
+          @param function withFilterFn  OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
           @return promise               Returns a WindowsAzure promise
         */
 
