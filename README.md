@@ -45,12 +45,12 @@ angular.module('myapp')
 
 This will expose the following methods
 
-* [Azureservice.query(tableName, parameters)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters)
-* [Azureservice.getAll(tableName)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
-* [Azureservice.getById(tableName, id)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id)
-* [Azureservice.insert(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
-* [Azureservice.update(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
-* [Azureservice.delete(tableName, obj)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
+* [Azureservice.query(tableName, parameters, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters)
+* [Azureservice.getAll(tableName, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
+* [Azureservice.getById(tableName, id, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id)
+* [Azureservice.insert(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
+* [Azureservice.update(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
+* [Azureservice.delete(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
 * [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
 * [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
