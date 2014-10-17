@@ -50,7 +50,7 @@ This will expose the following methods
 * [Azureservice.getById(tableName, id, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id)
 * [Azureservice.insert(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
 * [Azureservice.update(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
-* [Azureservice.delete(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
+* [Azureservice.del(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
 * [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
 * [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
@@ -316,7 +316,7 @@ Returns
 AngularJS Promise
 
 
-Azureservice.delete(tableName, obj, withFilterFn)
+Azureservice.del(tableName, obj, withFilterFn)
 =================
 Delete from the Azure database
 
@@ -348,7 +348,7 @@ AngularJS Promise
 Example
 -------------
 ```javascript
-Azureservice.delete('todoListTable', {
+Azureservice.del('todoListTable', {
 		id: '5A25CD78-F2D9-413C-81CA-6EC090590AAF'
  	})
 	.then(function(){
