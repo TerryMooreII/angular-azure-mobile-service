@@ -3,7 +3,7 @@ angular-azure-mobile-service
 
 An AngularJS service for the Azure Mobile Service Client.
 
-This support simple and complex queries, inserts, updates, deletes.  Supports login and logout of Azure authentication identies such as google, twitter, facebook, and windows live.  Also supports invoking your custom azure api calls. 
+This support simple and complex queries, inserts, updates, deletes.  Supports login and logout of Azure authentication identies such as Google, Twitter, Facebook, Windows Live, and Azure Active Directory.  Also supports invoking your custom azure api calls. 
 
 Installation
 -------------
@@ -452,7 +452,7 @@ Parameters:
 
 ````
 The oauth provider
-Vaild options are 'google', 'twitter', 'facebook', 'windowsaccount', 'windowsazureactivedirectory'
+Vaild options are 'google', 'twitter', 'facebook', 'windowsaccount', 'aad'
 ```
 
 Returns
