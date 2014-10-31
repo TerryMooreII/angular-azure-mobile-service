@@ -452,7 +452,7 @@ Parameters:
 
 ````
 The oauth provider
-Vaild options are 'google', 'twitter', 'facebook', 'windowsaccount', 'aad'
+Vaild options are 'google', 'twitter', 'facebook', 'microsoftaccount', 'aad'
 ```
 
 Returns
