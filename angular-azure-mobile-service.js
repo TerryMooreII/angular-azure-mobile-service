@@ -5,7 +5,7 @@ angular.module('azure-mobile-service.module', [])
 
     var API_URL = 'https://<AZURE_APP_NAME>.azure-mobile.net/';
 -   var API_KEY = '<AZURE_APP_API_KEY>';
-    var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'windowsaccount', 'aad'];
+    var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'microsoftaccount', 'aad'];
 
     var MobileServiceClient = WindowsAzure.MobileServiceClient;
     var client = new MobileServiceClient(API_URL, API_KEY);
