@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('azure-mobile-service.module', [])
-  .service('Azureservice', function Azureservice($q) {
+  .service('Azureservice', function Azureservice($q, AzureMobileServiceClient) {
 
-    var API_URL = 'https://<AZURE_APP_NAME>.azure-mobile.net/';
-    var API_KEY = '<AZURE_APP_API_KEY>';
+    var API_URL = AzureMobileServiceClient.API_URL;
+    var API_KEY = AzureMobileServiceClient.API_KEY;
     var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'microsoftaccount', 'aad'];
 
     var MobileServiceClient = WindowsAzure.MobileServiceClient;

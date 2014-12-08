@@ -30,7 +30,16 @@ Add `'azure-mobile-service.module'` to your main angular.module like so
 angular.module('myapp', ['myApp.controllers', 'myApp.services', 'azure-mobile-service.module']);
 ````
 
-Update the API_URL and API_KEY variables located in the  `angular-azure-mobile-service.js` file with your Azure account information.
+API Key information **New in 1.1**
+-------------------
+Create an AngularJS `constant` service called `AzureMobileServiceClient`, this will provide the Azure Mobile service with the API Key and URL and will not get overwritten with bower updates.
+```javascript
+ angular.module('your-module-name').constant('AzureMobileServiceClient', {
+    API_URL : 'https://<your-api-url>.azure-mobile.net/',
+    API_KEY : '<your-api-key>'
+  });
+
+```
 
 
 How to use
