@@ -135,7 +135,7 @@ Azureservice.query('todoListTable', {
  		}
  	})
 	.then(function(items) {
-		//Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable 
 		$scope.items = items;
 		
 	}, function(err) {
@@ -162,7 +162,7 @@ Azureservice.query('todoListTable', {
 	 	]
  	})
 	.then(function(items) {
-		//Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable 
 		$scope.items = items;
 		
 	}, function(err) {
@@ -193,7 +193,7 @@ Azureservice.query('todoListTable', {
 	 	columns: ['name', 'isFinished']
  	})
 	.then(function(items) {
-		//Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable 
 		$scope.items = items;
 		
 	}, function(err) {
@@ -210,12 +210,12 @@ This will run the criteria function against the results passing in params array.
 ```javascript
 Azureservice.query('todoListTable', {
  	criteria: function() {
- 			return this.name.indexOf(param[0]) !== -1;  //The this keyword is in referece to the Azure results
+ 			return this.name.indexOf(param[0]) !== -1;  // The this keyword is in referece to the Azure results
  		},
  	params: ['terry']
  	})
 	.then(function(items) {
-		//Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable 
 		$scope.items = items;
 		
 	}, function(err) {
