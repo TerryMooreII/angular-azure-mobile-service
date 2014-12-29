@@ -116,14 +116,13 @@ Note: The empty object is optional.
 
 ```javascript
 Azureservice.query('todoListTable', {})
-	.then(function(items){
-		//Assigin the results to a $scope variable 
+	.then(function(items) {
+		// Assigin the results to a $scope variable 
 		$scope.items = items;
 		
-	}, function(err){
-		console.error('There was an error quering Azure " + err);
-	})
-}    
+	}, function(err) {
+		console.error('There was an error quering Azure ' + err);
+	});
 
 ```
 
@@ -135,14 +134,13 @@ Azureservice.query('todoListTable', {
  			isFinished:false
  		}
  	})
-	.then(function(items){
+	.then(function(items) {
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
 		
-	}, function(err){
-		console.error('There was an error quering Azure " + err);
-	})
-}    
+	}, function(err) {
+		console.error('There was an error quering Azure ' + err);
+	});
 
 ```
 
@@ -163,14 +161,14 @@ Azureservice.query('todoListTable', {
 	 		}
 	 	]
  	})
-	.then(function(items){
+	.then(function(items) {
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
 		
-	}, function(err){
-		console.error('There was an error quering Azure " + err);
-	})
-}    
+	}, function(err) {
+		console.error('There was an error quering Azure ' + err);
+	});
+    
 ```
 
 Same query as before but adding the pagination options of skip and take (See Azure docs) and returning just the colums name, isFinished
@@ -194,14 +192,14 @@ Azureservice.query('todoListTable', {
 	 	take: 25,
 	 	columns: ['name', 'isFinished']
  	})
-	.then(function(items){
+	.then(function(items) {
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
 		
-	}, function(err){
-		console.error('There was an error quering Azure " + err);
-	})
-}    
+	}, function(err) {
+		console.error('There was an error quering Azure ' + err);
+	});
+    
 ```
 
 For complex queries you can pass a pedicate function into the critera instead of an object, if you need to pass varibles to the function then pass add the params array.
@@ -211,19 +209,19 @@ This will run the criteria function against the results passing in params array.
 
 ```javascript
 Azureservice.query('todoListTable', {
- 	criteria: function(){
+ 	criteria: function() {
  			return this.name.indexOf(param[0]) !== -1;  //The this keyword is in referece to the Azure results
  		},
  	params: ['terry']
  	})
-	.then(function(items){
+	.then(function(items) {
 		//Assigin the results to a $scope variable 
 		$scope.items = items;
 		
-	}, function(err){
-		console.error('There was an error quering Azure " + err);
-	})
-}    
+	}, function(err) {
+		console.error('There was an error quering Azure ' + err);
+	});
+    
 ```
 
 
@@ -264,12 +262,12 @@ Azureservice.insert('todoListTable', {
  		owner: 'Terry Moore',
  		isFinished: false
  	})
-	.then(function(){
+	.then(function() { 
 		console.log('Insert successful');
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 Returns
@@ -312,12 +310,12 @@ Azureservice.update('todoListTable', {
 		id: '5A25CD78-F2D9-413C-81CA-6EC090590AAF',
  		isFinished: true
  	})
-	.then(function(){
+	.then(function() {
 		console.log('Update successful');
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 Returns
@@ -360,12 +358,12 @@ Example
 Azureservice.del('todoListTable', {
 		id: '5A25CD78-F2D9-413C-81CA-6EC090590AAF'
  	})
-	.then(function(){
+	.then(function() {
 		console.log('Delete successful');
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 Azureservice.getAll(tableName, withFilterFn)
@@ -396,13 +394,13 @@ Example
 -------------
 ```javascript
 Azureservice.getAll('todoListTable')
-	.then(function(items){
+	.then(function(items) {
 		console.log('Query successful');
 		$scope.item = items;
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 Azureservice.getById(tableName, id, withFilterFn)
@@ -438,13 +436,13 @@ Example
 -------------
 ```javascript
 Azureservice.getById('todoListTable', '5A25CD78-F2D9-413C-81CA-6EC090590AAF')
-	.then(function(item){
+	.then(function(item) {
 		console.log('Query successful');
 		$scope.item = item;
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 
@@ -473,12 +471,12 @@ Example
 -------------
 ```javascript
 Azureservice.login('google')
-	.then(function(){
+	.then(function() {
 		console.log('Login successful');
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 
@@ -564,19 +562,19 @@ AngularJS Promise
 Example
 -------------
 ```javascript
-Azureservice.invokeApi('apiName'{
+Azureservice.invokeApi('apiName' {
 		method: 'get',
 		body: {
 			...
 		}
 	})
-	.then(function(response){
+	.then(function(response) {
 		console.log('Here is my response object');
 		console.log(response)
-	}, function(err){
+	}, function(err) {
 		console.error('Azure Error: ' + err);
-	})
-}    
+	});
+    
 ```
 
 
