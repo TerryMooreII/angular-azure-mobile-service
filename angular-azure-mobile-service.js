@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('azure-mobile-service.module', [])
-  .service('Azureservice', function Azureservice($q, AzureMobileServiceClient) {
+  .service('Azureservice', ["$q", "AzureMobileServiceClient", function Azureservice($q, AzureMobileServiceClient) {
 
     var API_URL = AzureMobileServiceClient.API_URL;
     var API_KEY = AzureMobileServiceClient.API_KEY;
@@ -313,4 +313,4 @@ angular.module('azure-mobile-service.module', [])
         }
     };
 
-});
+}]);
