@@ -60,14 +60,14 @@ angular.module('myapp')
 
 This will expose the following methods
 
-* [Azureservice.query(tableName, parameters, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters)
-* [Azureservice.getAll(tableName, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
-* [Azureservice.getById(tableName, id, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id)
-* [Azureservice.insert(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
-* [Azureservice.update(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
-* [Azureservice.del(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
+* [Azureservice.query(tableName, parameters, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters-withfilterfn)
+* [Azureservice.insert(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj-withfilterfn)
+* [Azureservice.update(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service##azureserviceupdatetablename-obj-withfilterfn)
+* [Azureservice.del(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeltablename-obj-withfilterfn)
+* [Azureservice.getAll(tableName, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename-withfilterfn)
+* [Azureservice.getById(tableName, id, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id-withfilterfn)
 * [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
-* [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
+* [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicelogout)
 * [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
 * [Azureservice.invokeApi()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinvokeapiname-params)
 
@@ -275,10 +275,6 @@ Azureservice.insert('todoListTable', {
 	});
     
 ```
-
-Returns
------------
-AngularJS Promise
 
 
 Azureservice.update(tableName, obj, withFilterFn)
