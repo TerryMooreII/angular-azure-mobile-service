@@ -447,6 +447,49 @@ Azureservice.getById('todoListTable', '5A25CD78-F2D9-413C-81CA-6EC090590AAF')
     
 ```
 
+Azureservice.read(tableName, parameters, withFilterFn)
+=================
+Execute read-query in Azure with optional parameters in the URI that can be read by the Azure JS backend (request.parameters.property).
+
+Parameters:
+---------------
+**tableName** Required
+
+````
+The Azure table to get all data from
+```
+
+**parameters** Optional
+````
+An object of user-defined parameters and values to include in the request URI query string
+````
+
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  
+```
+
+Returns
+-----------
+AngularJS Promise
+
+Example
+-------------
+```javascript
+Azureservice.read('todoListTable',{
+	apiVersion: "1.0",
+	isCompleted: true
+	})
+	.then(function(items) {
+		console.log('Query successful');
+		$scope.item = items;
+	}, function(err) {
+		console.error('Azure Error: ' + err);
+	});
+    
+```
+
 
 Azureservice.login(oauthProvider)
 =================
