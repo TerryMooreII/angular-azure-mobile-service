@@ -66,6 +66,7 @@ This will expose the following methods
 * [Azureservice.del(tableName, obj, withFilterFn)] (#azureservicedeltablename-obj-withfilterfn)
 * [Azureservice.getAll(tableName, withFilterFn)] (#azureservicegetalltablename-withfilterfn)
 * [Azureservice.getById(tableName, id, withFilterFn)] (#azureservicegetbyidtablename-id-withfilterfn)
+* [Azureservice.read(tableName, parameters, withFilterFn)] (#azureservicereadtablename-parameters-withfilterfn)
 * [Azureservice.login(oauthProvider)] (#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (#azureservicelogout)
 * [Azureservice.isLoggedIn()] (#azureserviceisloggedin)
