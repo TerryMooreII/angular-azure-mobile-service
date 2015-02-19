@@ -167,7 +167,7 @@ angular.module('azure-mobile-service.module', [])
          Execute read-query in Azure
 
          @param string tableName       REQUIRED The name of the table to query
-         @param function withFilterFn  OPTIONAL An object of user-defined parameters and values to include in the request URI query string
+         @param object parameters	   OPTIONAL An object of user-defined parameters and values to include in the request URI query string
          @param function withFilterFn  OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
          @return promise               Returns a WindowsAzure promise
          */
