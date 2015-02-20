@@ -60,16 +60,17 @@ angular.module('myapp')
 
 This will expose the following methods
 
-* [Azureservice.query(tableName, parameters, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicequerytablename-parameters)
-* [Azureservice.getAll(tableName, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetalltablename)
-* [Azureservice.getById(tableName, id, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicegetbyidtablename-id)
-* [Azureservice.insert(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinserttablename-obj)
-* [Azureservice.update(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceupdatetablename-obj)
-* [Azureservice.del(tableName, obj, withFilterFn)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureservicedeletetablename-obj)
-* [Azureservice.login(oauthProvider)] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider)
-* [Azureservice.logout()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceloginoauthprovider-1)
-* [Azureservice.isLoggedIn()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceisloggedin)
-* [Azureservice.invokeApi()] (https://github.com/TerryMooreII/angular-azure-mobile-service#azureserviceinvokeapiname-params)
+* [Azureservice.query(tableName, parameters, withFilterFn)] (#azureservicequerytablename-parameters-withfilterfn)
+* [Azureservice.insert(tableName, obj, withFilterFn)] (#azureserviceinserttablename-obj-withfilterfn)
+* [Azureservice.update(tableName, obj, withFilterFn)] (#azureserviceupdatetablename-obj-withfilterfn)
+* [Azureservice.del(tableName, obj, withFilterFn)] (#azureservicedeltablename-obj-withfilterfn)
+* [Azureservice.getAll(tableName, withFilterFn)] (#azureservicegetalltablename-withfilterfn)
+* [Azureservice.getById(tableName, id, withFilterFn)] (#azureservicegetbyidtablename-id-withfilterfn)
+* [Azureservice.read(tableName, parameters, withFilterFn)] (#azureservicereadtablename-parameters-withfilterfn)
+* [Azureservice.login(oauthProvider)] (#azureserviceloginoauthprovider)
+* [Azureservice.logout()] (#azureservicelogout)
+* [Azureservice.isLoggedIn()] (#azureserviceisloggedin)
+* [Azureservice.invokeApi()] (#azureserviceinvokeapiname-params)
 
 
 
@@ -276,10 +277,6 @@ Azureservice.insert('todoListTable', {
     
 ```
 
-Returns
------------
-AngularJS Promise
-
 
 Azureservice.update(tableName, obj, withFilterFn)
 =================
@@ -445,6 +442,49 @@ Azureservice.getById('todoListTable', '5A25CD78-F2D9-413C-81CA-6EC090590AAF')
 	.then(function(item) {
 		console.log('Query successful');
 		$scope.item = item;
+	}, function(err) {
+		console.error('Azure Error: ' + err);
+	});
+    
+```
+
+Azureservice.read(tableName, parameters, withFilterFn)
+=================
+Execute read-query in Azure with optional parameters in the URI that can be read by the Azure JS backend (request.parameters.property).
+
+Parameters:
+---------------
+**tableName** Required
+
+````
+The Azure table to get all data from
+```
+
+**parameters** Optional
+````
+An object of user-defined parameters and values to include in the request URI query string
+````
+
+**withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
+
+````
+A function that can read and write arbitrary properties or add additional headers to the request  
+```
+
+Returns
+-----------
+AngularJS Promise
+
+Example
+-------------
+```javascript
+Azureservice.read('todoListTable',{
+	apiVersion: "1.0",
+	isCompleted: true
+	})
+	.then(function(items) {
+		console.log('Query successful');
+		$scope.item = items;
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
