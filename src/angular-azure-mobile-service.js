@@ -1,7 +1,8 @@
-'use strict';
 
 angular.module('azure-mobile-service.module', [])
   .service('Azureservice', ["$q", "AzureMobileServiceClient", function Azureservice($q, AzureMobileServiceClient) {
+
+    'use strict';
 
     var API_URL = AzureMobileServiceClient.API_URL;
     var API_KEY = AzureMobileServiceClient.API_KEY;
@@ -38,6 +39,7 @@ angular.module('azure-mobile-service.module', [])
     var isNullOrUndefined = function(value){
         return value === null || typeof value === 'undefined';
     };
+    
     var isNotNullOrUndefined = function(value){
         return !isNullOrUndefined(value);
     };
