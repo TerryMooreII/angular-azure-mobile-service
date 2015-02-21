@@ -37,7 +37,7 @@
     "autoupdate": {
         "source": "git",
         "target": "https://github.com/TerryMooreII/angular-azure-mobile-service.git",
-        "basePath": "",
+        "basePath": "dist",
         "files": [
             "angular-azure-mobile-service.js",
             "angular-azure-mobile-service.min.js"
