@@ -14,6 +14,12 @@ angular.module('azure-mobile-service.module', []).service('Azureservice', [
       ];
     var MobileServiceClient = WindowsAzure.MobileServiceClient;
     var client = new MobileServiceClient(API_URL, API_KEY);
+    var setCachedUser = function (user) {
+      sessionStorage.loggedInUser = JSON.stringify(user);
+    };
+    var setMSClientUser = function (user) {
+      client.currentUser = user;
+    };
     var getCachedUser = function () {
       if (sessionStorage.loggedInUser) {
         client.currentUser = JSON.parse(sessionStorage.loggedInUser);
@@ -149,9 +155,15 @@ angular.module('azure-mobile-service.module', []).service('Azureservice', [
         }
         var promise = client.login(oauthProvider).then(function () {
             //cache login 
-            sessionStorage.loggedInUser = JSON.stringify(client.currentUser);
+            setCachedUser(client.currentUser);
           });
         return wrapAzurePromiseWithAngularPromise(promise);
+      },
+      setCurrentUser: function (currentUser) {
+        if (angular.isDefined(currentUser) && angular.isObject(currentUser)) {
+          setMSClientUser(currentUser);
+          setCachedUser(currentUser);
+        }
       },
       logout: function () {
         //clear cache

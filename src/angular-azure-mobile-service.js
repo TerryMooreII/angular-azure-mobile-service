@@ -11,7 +11,14 @@ angular.module('azure-mobile-service.module', [])
     var MobileServiceClient = WindowsAzure.MobileServiceClient;
     var client = new MobileServiceClient(API_URL, API_KEY);
 
-    
+    var setCachedUser = function(user){
+        sessionStorage.loggedInUser = JSON.stringify(user);
+    };
+
+    var setMSClientUser = function(user){
+        client.currentUser = user;
+    };
+
     var getCachedUser = function(){
         if (sessionStorage.loggedInUser){
             client.currentUser = JSON.parse(sessionStorage.loggedInUser);
@@ -263,11 +270,27 @@ angular.module('azure-mobile-service.module', [])
 
             var promise = client.login(oauthProvider).then(function(){
                 //cache login 
-                sessionStorage.loggedInUser = JSON.stringify(client.currentUser);
+                setCachedUser(client.currentUser);
             });
             
             return wrapAzurePromiseWithAngularPromise(promise);
         },
+
+
+        /*
+          Sets the logged in user. Used when using azure custom authentication
+          @param object user REQUIRED user object
+        */
+
+        setCurrentUser: function(currentUser){
+
+            if(angular.isDefined(currentUser) && angular.isObject(currentUser)){
+                setMSClientUser(currentUser);
+                setCachedUser(currentUser);
+            }
+
+        },
+
         /*
           Logs a user out 
         */
@@ -306,9 +329,9 @@ angular.module('azure-mobile-service.module', [])
             if (isUndefinedOrNotAnObject(options)){
                 options = {
                     method: 'get'
-                }
+                };
             }else if (isNullOrUndefined(options.method)){
-                options.method = 'get'
+                options.method = 'get';
             }else if (validMethods.indexOf(options.method.toLowerCase()) === -1 ){
                 console.error('Azureservice.invokeApi Invalid method type');
                 return null;
