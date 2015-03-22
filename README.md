@@ -69,6 +69,7 @@ This will expose the following methods
 * [Azureservice.read(tableName, parameters, withFilterFn)] (#azureservicereadtablename-parameters-withfilterfn)
 * [Azureservice.login(oauthProvider)] (#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (#azureservicelogout)
+* [Azureservice.setCurrentUser(userObj)] (AzureservicesetCurrentUseruserObj)
 * [Azureservice.isLoggedIn()] (#azureserviceisloggedin)
 * [Azureservice.invokeApi()] (#azureserviceinvokeapiname-params)
 
@@ -524,6 +525,35 @@ Azureservice.login('google')
 	});
     
 ```
+
+
+
+
+Azureservice.setCurrentUser(userObj)
+=================
+Use this method to set the current user for the MS Client when using custom authentication. 
+[More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-dotnet-backend-get-started-custom-authentication/)
+
+
+Parameters:
+---------------
+**userObj** Required
+
+````
+The user object that is returned from your custom authentication.
+```
+
+Returns
+-----------
+
+
+
+Example
+-------------
+```javascript
+Azureservice.setCurrentUser(userObj);
+```
+
 
 
 Azureservice.logout()
