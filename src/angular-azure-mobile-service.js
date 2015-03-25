@@ -1,18 +1,35 @@
 
 angular.module('azure-mobile-service.module', [])
-  .service('Azureservice', ["$q", "AzureMobileServiceClient", function Azureservice($q, AzureMobileServiceClient) {
+  .service('Azureservice', ['$window', '$q', 'AzureMobileServiceClient', function Azureservice($window, $q, AzureMobileServiceClient) {
 
     'use strict';
 
-    var API_URL = AzureMobileServiceClient.API_URL;
-    var API_KEY = AzureMobileServiceClient.API_KEY;
     var VAILD_OAUTH_PROVIDERS = ['google', 'twitter', 'facebook', 'microsoftaccount', 'aad'];
 
-    var MobileServiceClient = WindowsAzure.MobileServiceClient;
-    var client = new MobileServiceClient(API_URL, API_KEY);
+    var MobileServiceClient;
+    var client;
+    var storage;
+  
+    var initMSClient = function(){
 
+        if (isNullOrUndefined(AzureMobileServiceClient.API_URL) || isNullOrUndefined(AzureMobileServiceClient.API_KEY)){
+            throw('Angularservice: Unable to configure the MS Mobile Client.  Missing API KEY or URL');
+        }
+
+        MobileServiceClient = WindowsAzure.MobileServiceClient;
+        client = new MobileServiceClient(AzureMobileServiceClient.API_URL, AzureMobileServiceClient.API_KEY);
+    };
+
+    var setStorage = function(){
+        if (typeof AzureMobileServiceClient.STORAGE === 'string' && AzureMobileServiceClient.STORAGE.toLowerCase() === 'local'){
+            storage = $window.localStorage;
+        }else{
+            storage = $window.sessionStorage;
+        }
+    };
+    
     var setCachedUser = function(user){
-        sessionStorage.loggedInUser = JSON.stringify(user);
+        storage.loggedInUser = JSON.stringify(user);
     };
 
     var setMSClientUser = function(user){
@@ -20,12 +37,10 @@ angular.module('azure-mobile-service.module', [])
     };
 
     var getCachedUser = function(){
-        if (sessionStorage.loggedInUser){
-            client.currentUser = JSON.parse(sessionStorage.loggedInUser);
+        if (storage.loggedInUser){
+            client.currentUser = JSON.parse(storage.loggedInUser);
         }
     };
-
-    getCachedUser();
 
     var getTable = function(tableName, withFilterFn){
         
@@ -65,6 +80,15 @@ angular.module('azure-mobile-service.module', [])
             });
         return deferred.promise;
     };
+
+     var init = function(){
+        initMSClient();
+        setStorage();
+        getCachedUser();
+    };
+
+    //Initiate the service
+    init();
 
     return{
         /*
@@ -171,12 +195,12 @@ angular.module('azure-mobile-service.module', [])
         getAll: function(tableName, withFilterFn){
             return this.query(tableName, null, withFilterFn);
         },
-		
+        
         /*
          Execute read-query in Azure
 
          @param string tableName       REQUIRED The name of the table to query
-         @param object parameters	   OPTIONAL An object of user-defined parameters and values to include in the request URI query string
+         @param object parameters      OPTIONAL An object of user-defined parameters and values to include in the request URI query string
          @param function withFilterFn  OPTIONAL A function that can read and write arbitrary properties or add additional headers to the request
          @return promise               Returns a WindowsAzure promise
          */
@@ -297,12 +321,12 @@ angular.module('azure-mobile-service.module', [])
 
         logout: function(){
             //clear cache
-            sessionStorage.loggedInUser = null;
+            storage.loggedInUser = null;
             client.logout();
         },
         
         isLoggedIn: function(){
-            return isNotNullOrUndefined(client.currentUser)  && isNotNullOrUndefined(sessionStorage.loggedInUser);
+            return isNotNullOrUndefined(client.currentUser)  && isNotNullOrUndefined(storage.loggedInUser);
         }, 
 
         /*

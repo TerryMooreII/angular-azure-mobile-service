@@ -39,10 +39,13 @@ angular.module('myapp', ['myApp.controllers', 'myApp.services', 'azure-mobile-se
 API Key information **New in 1.1**
 -------------------
 Create an AngularJS `constant` service called `AzureMobileServiceClient`, this will provide the Azure Mobile service with the API Key and URL and will not get overwritten with bower updates.
+
+If you want to store the current user in localStorage instead of sessionStorage then add `STORAGE: 'local'` to the AzureMobileServiceClient settings object.
+
 ```javascript
  angular.module('your-module-name').constant('AzureMobileServiceClient', {
     API_URL : 'https://<your-api-url>.azure-mobile.net/',
-    API_KEY : '<your-api-key>'
+    API_KEY : '<your-api-key>',
   });
 
 ```
