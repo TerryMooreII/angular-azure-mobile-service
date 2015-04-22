@@ -72,7 +72,8 @@ This will expose the following methods
 * [Azureservice.read(tableName, parameters, withFilterFn)] (#azureservicereadtablename-parameters-withfilterfn)
 * [Azureservice.login(oauthProvider)] (#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (#azureservicelogout)
-* [Azureservice.setCurrentUser(userObj)] (AzureservicesetCurrentUseruserObj)
+* [Azureservice.setCurrentUser(userObj)] (#azureservicesetcurrentuseruserobj)
+* [Azureservice.getCurrentUser()] (#azureservicegetcurrentuser)
 * [Azureservice.isLoggedIn()] (#azureserviceisloggedin)
 * [Azureservice.invokeApi()] (#azureserviceinvokeapiname-params)
 
@@ -555,6 +556,31 @@ Example
 -------------
 ```javascript
 Azureservice.setCurrentUser(userObj);
+```
+
+
+
+Azureservice.getCurrentUser()
+=================
+Use this method to get the current user object from the MS Client.
+
+
+Parameters:
+---------------
+
+None
+
+Returns
+-----------
+
+The user object that is logged in with Azure authentication, or null if none is logged in.
+
+
+
+Example
+-------------
+```javascript
+Azureservice.getCurrentUser();
 ```
 
 

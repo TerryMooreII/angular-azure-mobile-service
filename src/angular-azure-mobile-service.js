@@ -315,6 +315,20 @@ angular.module('azure-mobile-service.module', [])
 
         },
 
+
+        /*
+          Gets the logged in user.
+
+          @return The user logged in to Azure, or null if not logged in.
+        */
+
+        getCurrentUser: function(){
+
+            return client.currentUser;
+
+        },
+
+
         /*
           Logs a user out 
         */
