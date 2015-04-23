@@ -17,8 +17,9 @@ npm install angular-azure-mobile-service
 CDN
 ------
 ```HTML
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-azure-mobile-service/1.3.4/angular-azure-mobile-service.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-azure-mobile-service/1.3.6/angular-azure-mobile-service.min.js"></script>
 ```
+Check for latest published CDN version [here] (https://cdnjs.com/libraries/angular-azure-mobile-service)
 
 
 Required dependancies
