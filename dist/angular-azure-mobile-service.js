@@ -185,6 +185,9 @@ angular.module('azure-mobile-service.module', []).service('Azureservice', [
           setCachedUser(currentUser);
         }
       },
+      getCurrentUser: function () {
+        return client.currentUser;
+      },
       logout: function () {
         //clear cache
         storage.loggedInUser = null;

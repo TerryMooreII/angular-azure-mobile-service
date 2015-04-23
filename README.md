@@ -10,6 +10,9 @@ Installation
 ```
 bower install angular-azure-mobile-service
 ```
+```
+npm install angular-azure-mobile-service
+```
 
 CDN
 ------
