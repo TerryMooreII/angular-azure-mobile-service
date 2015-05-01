@@ -472,6 +472,7 @@ The Azure table to get all data from
 **parameters** Optional
 ````
 An object of user-defined parameters and values to include in the request URI query string
+Or as a string to pass an oData query filter. 
 ````
 
 **withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
@@ -484,7 +485,7 @@ Returns
 -----------
 AngularJS Promise
 
-Example
+Example with parameters object
 -------------
 ```javascript
 Azureservice.read('todoListTable',{
@@ -499,6 +500,20 @@ Azureservice.read('todoListTable',{
 	});
     
 ```
+
+Example with parameters as an oData filter string
+-------------
+```javascript
+Azureservice.read('todoListTable', "$filter=name eq 'Test User'")
+	.then(function(items) {
+	    console.log(items)
+	}).catch(function(error) {
+	    console.log(error)
+	})
+    
+```
+
+
 
 
 Azureservice.login(oauthProvider)

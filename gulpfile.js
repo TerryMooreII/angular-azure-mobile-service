@@ -1,5 +1,5 @@
 // Include gulp
-var gulp = require('gulp'); 
+var gulp = require('gulp');
 
 // Include Our Plugins
 var jshint = require('gulp-jshint');
@@ -21,7 +21,9 @@ gulp.task('lint', function() {
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
     return gulp.src(SRC)
-        .pipe(ngmin({dynamic: false}))
+        .pipe(ngmin({
+            dynamic: false
+        }))
         .pipe(gulp.dest('dist'))
         .pipe(rename(MIN))
         .pipe(uglify())
@@ -30,33 +32,35 @@ gulp.task('scripts', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-  gulp.watch('demo/*.html', notifyLiveReload);
-  gulp.watch('src/*.js', notifyLiveReload)
-  gulp.watch('demo/css/*.css', notifyLiveReload);
+    gulp.watch('demo/*.html', notifyLiveReload);
+    gulp.watch('src/*.js', notifyLiveReload)
+    gulp.watch('demo/css/*.css', notifyLiveReload);
 });
 
 gulp.task('express', function() {
-  var express = require('express');
-  var app = express();
-  app.use(require('connect-livereload')({port: 4002}));
-  app.use(express.static(__dirname));
-  app.listen(4000);
+    var express = require('express');
+    var app = express();
+    app.use(require('connect-livereload')({
+        port: 4002
+    }));
+    app.use(express.static(__dirname));
+    app.listen(4000);
 });
 
 var tinylr;
 gulp.task('livereload', function() {
-  tinylr = require('tiny-lr')();
-  tinylr.listen(4002);
+    tinylr = require('tiny-lr')();
+    tinylr.listen(4002);
 });
 
 function notifyLiveReload(event) {
-  var fileName = require('path').relative(__dirname, event.path);
+    var fileName = require('path').relative(__dirname, event.path);
 
-  tinylr.changed({
-    body: {
-      files: [fileName]
-    }
-  });
+    tinylr.changed({
+        body: {
+            files: [fileName]
+        }
+    });
 }
 
 
@@ -68,5 +72,5 @@ gulp.task('build', ['lint', 'scripts']);
 
 
 gulp.task('server', ['scripts', 'express', 'livereload', 'watch'], function() {
-    
+
 })
