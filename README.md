@@ -24,7 +24,7 @@ Check for latest published CDN version [here] (https://cdnjs.com/libraries/angul
 
 Required dependancies
 -----------------------
-* [AngularJS] (http://www.angularjs.com) 
+* [AngularJS] (http://www.angularjs.org) 
 * [Azure Mobile Service Client] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-get-started-data/)
 
 
