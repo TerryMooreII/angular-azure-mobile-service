@@ -2,7 +2,7 @@
   "author": "Terry Moore II",
   "name": "angular-azure-mobile-service",
   "description": "Angular Azure Mobile Service",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "homepage": "https://github.com/TerryMooreII/angular-azure-mobile-service.git",
   "main": "./dist/angular-azure-mobile-service.min.js",
   "dependencies": {

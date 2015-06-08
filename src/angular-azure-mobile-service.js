@@ -11,12 +11,14 @@ angular.module('azure-mobile-service.module', [])
 
         var initMSClient = function() {
 
-            if (isNullOrUndefined(AzureMobileServiceClient.API_URL) || isNullOrUndefined(AzureMobileServiceClient.API_KEY)) {
-                throw ('Angularservice: Unable to configure the MS Mobile Client.  Missing API KEY or URL');
+            if (isNullOrUndefined(AzureMobileServiceClient.API_URL)) {
+                throw ('Angularservice: Unable to configure the MS Mobile Client.  Missing API URL');
             }
+            
+            var apiKey = AzureMobileServiceClient.API_KEY || null;
 
             MobileServiceClient = WindowsAzure.MobileServiceClient;
-            client = new MobileServiceClient(AzureMobileServiceClient.API_URL, AzureMobileServiceClient.API_KEY);
+            client = new MobileServiceClient(AzureMobileServiceClient.API_URL, apiKey);
         };
 
         var setStorage = function() {
