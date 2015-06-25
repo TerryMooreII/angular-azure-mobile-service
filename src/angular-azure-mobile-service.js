@@ -14,7 +14,7 @@ angular.module('azure-mobile-service.module', [])
             if (isNullOrUndefined(AzureMobileServiceClient.API_URL)) {
                 throw ('Angularservice: Unable to configure the MS Mobile Client.  Missing API URL');
             }
-            
+
             var apiKey = AzureMobileServiceClient.API_KEY || null;
 
             MobileServiceClient = WindowsAzure.MobileServiceClient;
@@ -356,7 +356,7 @@ angular.module('azure-mobile-service.module', [])
 
                 var deferred = $q.defer();
 
-                var validMethods = ['get', 'post', 'put', 'delete'];
+                var validMethods = ['get', 'post', 'put', 'delete', 'patch'];
 
                 if (isNullOrUndefined(name)) {
                     console.error('Azureservice.invokeApi No custom api name specified');

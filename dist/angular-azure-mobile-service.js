@@ -203,7 +203,8 @@ angular.module('azure-mobile-service.module', []).service('Azureservice', [
             'get',
             'post',
             'put',
-            'delete'
+            'delete',
+            'patch'
           ];
         if (isNullOrUndefined(name)) {
           console.error('Azureservice.invokeApi No custom api name specified');
