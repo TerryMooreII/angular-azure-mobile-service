@@ -74,7 +74,7 @@ This will expose the following methods
 * [Azureservice.getAll(tableName, withFilterFn)] (#azureservicegetalltablename-withfilterfn)
 * [Azureservice.getById(tableName, id, withFilterFn)] (#azureservicegetbyidtablename-id-withfilterfn)
 * [Azureservice.read(tableName, parameters, withFilterFn)] (#azureservicereadtablename-parameters-withfilterfn)
-* [Azureservice.login(oauthProvider)] (#azureserviceloginoauthprovider)
+* [Azureservice.login(oauthProvider, token)] (#azureserviceloginoauthprovider)
 * [Azureservice.logout()] (#azureservicelogout)
 * [Azureservice.setCurrentUser(userObj)] (#azureservicesetcurrentuseruserobj)
 * [Azureservice.getCurrentUser()] (#azureservicegetcurrentuser)
@@ -516,9 +516,9 @@ Azureservice.read('todoListTable', "$filter=name eq 'Test User'")
 
 
 
-Azureservice.login(oauthProvider)
+Azureservice.login(oauthProvider, token)
 =================
-Login using the specified Oauth Provider.
+Login using the specified OAuth Provider and optinally provide an existing authentication token.
 Users logins are currently session based.  This may change in the future.
 [More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#caching)
 
@@ -528,8 +528,14 @@ Parameters:
 **oauthProvider** Required
 
 ````
-The oauth provider
+The OAuth provider
 Vaild options are 'google', 'twitter', 'facebook', 'microsoftaccount', 'aad'
+```
+
+**token** Optional
+
+````
+Optional authentication token used to login to the provider
 ```
 
 Returns
@@ -540,13 +546,21 @@ AngularJS Promise
 Example
 -------------
 ```javascript
+// New login to provider
 Azureservice.login('google')
 	.then(function() {
 		console.log('Login successful');
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
+// Use existing token to login
+Azureservice.login('google', { id_token: 'qwerty12345...' })
+	.then(function() {
+		console.log('Login successful');
+	}, function(err) {
+		console.error('Azure Error: ' + err);
+	});
 ```
 
 

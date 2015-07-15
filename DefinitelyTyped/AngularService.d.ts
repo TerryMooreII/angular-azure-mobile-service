@@ -8,7 +8,7 @@ interface IAzureService {
     getAll<T>(tableName: string, withFilterFn?: Function): ng.IPromise<T>;
     getById<T>(tableName: string, id: string, withFilterFn?: Function): ng.IPromise<T>;
     read<T>(tableName: string, parameters?: IAzureParameters, withFilterFn?:Function): ng.IPromise<T>;
-    login(oauthProvider: string): ng.IPromise<any>;
+    login(oauthProvider: string, token: Object): ng.IPromise<any>;
     setCurrentUser(userObj: Object): void;
     getCurrentUser(): Object;
     logout(): void;
