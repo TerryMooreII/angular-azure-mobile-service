@@ -283,17 +283,18 @@ angular.module('azure-mobile-service.module', [])
               Logs a user into the oauthProvider service using Windows Azure
               Stores the data in sessionStorage for future queries
         
-              @param  string oauthProvider  REQUIRED pass in an oauth provider
+              @param  string oauthProvider  REQUIRED Pass in an OAuth provider name (google, facebook, etc)
+              @param  string token          OPTIONAL An existing authentication token to login to the OAuth provider with
               @return promise               Returns a WindowsAzure promise
             */
 
-            login: function(oauthProvider) {
+            login: function(oauthProvider, token) {
 
                 if (!angular.isDefined(oauthProvider) || VAILD_OAUTH_PROVIDERS.indexOf(oauthProvider) === -1) {
                     throw new Error('Azureservice.login Invalid or no oauth provider listed.');
                 }
 
-                var promise = client.login(oauthProvider).then(function() {
+                var promise = client.login(oauthProvider, token).then(function() {
                     //cache login 
                     setCachedUser(client.currentUser);
                 });
