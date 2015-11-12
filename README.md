@@ -25,7 +25,7 @@ Check for latest published CDN version [here] (https://cdnjs.com/libraries/angul
 Required dependancies
 -----------------------
 * [AngularJS] (http://www.angularjs.org) 
-* [Azure Mobile Service Client] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-get-started-data/)
+* [Azure Mobile Service Client] (https://azure.microsoft.com/en-us/documentation/services/mobile-services/)
 
 
 Add the Azure Mobile Service Client to your index.html file 
