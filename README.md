@@ -225,7 +225,7 @@ This will run the criteria function against the results passing in params array.
 
 ```javascript
 Azureservice.query('todoListTable', {
- 	criteria: function() {
+ 	criteria: function(param) {
  			return this.name.indexOf(param[0]) !== -1;  // The this keyword is in referece to the Azure results
  		},
  	params: ['terry']
