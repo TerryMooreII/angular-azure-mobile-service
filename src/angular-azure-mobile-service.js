@@ -124,7 +124,13 @@ angular.module('azure-mobile-service.module', [])
                         obj.criteria = {};
                     }
 
-                    data = getTable(tableName, withFilterFn).where(obj.criteria, obj.params);
+                    data = getTable(tableName, withFilterFn);
+
+                    // Fetch system properties (if asked for)
+                    if (isNotNullOrUndefined(obj.systemProperties) && angular.isNumber(obj.systemProperties))
+                        data.systemProperties = obj.systemProperties;
+
+                    data = data.where(obj.criteria, obj.params);
 
                     //Number of results to return
                     if (isNotNullOrUndefined(obj.take) && angular.isNumber(obj.take)) {
