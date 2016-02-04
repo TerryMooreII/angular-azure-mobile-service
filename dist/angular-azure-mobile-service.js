@@ -86,7 +86,11 @@ angular.module('azure-mobile-service.module', []).service('Azureservice', [
           if (isUndefinedOrNotAnObjectOrFunction(obj.criteria)) {
             obj.criteria = {};
           }
-          data = getTable(tableName, withFilterFn).where(obj.criteria, obj.params);
+          data = getTable(tableName, withFilterFn);
+          // Fetch system properties (if asked for)
+          if (isNotNullOrUndefined(obj.systemProperties) && angular.isNumber(obj.systemProperties))
+            data.systemProperties = obj.systemProperties;
+          data = data.where(obj.criteria, obj.params);
           //Number of results to return
           if (isNotNullOrUndefined(obj.take) && angular.isNumber(obj.take)) {
             data = data.take(obj.take);
@@ -170,11 +174,11 @@ angular.module('azure-mobile-service.module', []).service('Azureservice', [
         }
         return wrapAzurePromiseWithAngularPromise(getTable(tableName, withFilterFn).del(obj));
       },
-      login: function (oauthProvider) {
+      login: function (oauthProvider, token) {
         if (!angular.isDefined(oauthProvider) || VAILD_OAUTH_PROVIDERS.indexOf(oauthProvider) === -1) {
           throw new Error('Azureservice.login Invalid or no oauth provider listed.');
         }
-        var promise = client.login(oauthProvider).then(function () {
+        var promise = client.login(oauthProvider, token).then(function () {
             //cache login 
             setCachedUser(client.currentUser);
           });

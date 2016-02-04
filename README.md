@@ -109,6 +109,12 @@ The Azure table to query
 	orderBy			   //Array of objects
 		column		   //Column name to sort by
 		direction      //Direction to sort : asc || desc	
+        systemProperties   //Number for system property to get    
+                           //__createdAt: 1    
+                           //__updatedAt: 2    
+                           //__version: 4    
+                           //All: 65535    
+                           //None: 0    
 }
 ```
 
