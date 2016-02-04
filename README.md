@@ -3,7 +3,7 @@ angular-azure-mobile-service
 
 An AngularJS service for the Azure Mobile Service Client.
 
-This supports simple and complex queries, inserts, updates, and deletes.  Supports login and logout of Azure authentication identities such as Google, Twitter, Facebook, Windows Live, and Azure Active Directory.  Also supports invoking your custom azure api calls. 
+This supports simple and complex queries, inserts, updates, and deletes.  Supports login and logout of Azure authentication identities such as Google, Twitter, Facebook, Windows Live, and Azure Active Directory.  Also supports invoking your custom azure api calls.
 
 Installation
 -------------
@@ -17,20 +17,20 @@ npm install angular-azure-mobile-service
 CDN
 ------
 ```HTML
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-azure-mobile-service/1.3.6/angular-azure-mobile-service.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-azure-mobile-service/1.3.11/angular-azure-mobile-service.min.js"></script>
 ```
 Check for latest published CDN version [here] (https://cdnjs.com/libraries/angular-azure-mobile-service)
 
 
 Required dependancies
 -----------------------
-* [AngularJS] (http://www.angularjs.org) 
+* [AngularJS] (http://www.angularjs.org)
 * [Azure Mobile Service Client] (https://azure.microsoft.com/en-us/documentation/services/mobile-services/)
 
 
-Add the Azure Mobile Service Client to your index.html file 
+Add the Azure Mobile Service Client to your index.html file
 ```HTML
-<script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.2.min.js'></script>
+<script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5.min.js'></script>
 ```
 
 After downloading the `angular-azure-mobile-service.js` to your AngularJS project then
@@ -108,7 +108,7 @@ The Azure table to query
 	columns			   //Array of column names to return
 	orderBy			   //Array of objects
 		column		   //Column name to sort by
-		direction      //Direction to sort : asc || desc	
+		direction      //Direction to sort : asc || desc
         systemProperties   //Number for system property to get    
                            //__createdAt: 1    
                            //__updatedAt: 2    
@@ -118,13 +118,13 @@ The Azure table to query
 }
 ```
 
-[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#querying) about what each parameter does 
+[More information] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#querying) about what each parameter does
 
 
 **withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request 
+A function that can read and write arbitrary properties or add additional headers to the request
 ```
 
 Returns
@@ -139,9 +139,9 @@ Note: The empty object is optional.
 ```javascript
 Azureservice.query('todoListTable', {})
 	.then(function(items) {
-		// Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable
 		$scope.items = items;
-		
+
 	}, function(err) {
 		console.error('There was an error quering Azure ' + err);
 	});
@@ -157,9 +157,9 @@ Azureservice.query('todoListTable', {
  		}
  	})
 	.then(function(items) {
-		// Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable
 		$scope.items = items;
-		
+
 	}, function(err) {
 		console.error('There was an error quering Azure ' + err);
 	});
@@ -176,7 +176,7 @@ Azureservice.query('todoListTable', {
 	 		{
 	 			column:'name',
 	 			direction:'asc'
-	 		}, 
+	 		},
 	 		{
 	 			column:'owner',
 	 			direction:'desc'
@@ -184,13 +184,13 @@ Azureservice.query('todoListTable', {
 	 	]
  	})
 	.then(function(items) {
-		// Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable
 		$scope.items = items;
-		
+
 	}, function(err) {
 		console.error('There was an error quering Azure ' + err);
 	});
-    
+
 ```
 
 Same query as before but adding the pagination options of skip and take (See Azure docs) and returning just the colums name, isFinished
@@ -204,30 +204,30 @@ Azureservice.query('todoListTable', {
 	 		{
 	 			column:'name',
 	 			direction:'asc'
-	 		}, 
+	 		},
 	 		{
 	 			column:'owner',
 	 			direction:'desc'
 	 		}
-	 	], 
+	 	],
 	 	skip: 10,
 	 	take: 25,
 	 	columns: ['name', 'isFinished']
  	})
 	.then(function(items) {
-		// Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable
 		$scope.items = items;
-		
+
 	}, function(err) {
 		console.error('There was an error quering Azure ' + err);
 	});
-    
+
 ```
 
 For complex queries you can pass a pedicate function into the critera instead of an object, if you need to pass varibles to the function then pass add the params array.
 You can still pass all the take, columns, skip parameters also but not shown here for reduce complexity
 
-This will run the criteria function against the results passing in params array.  This will return all rows that have a column name with terry in it.  Simalar to a SQL LIKE 
+This will run the criteria function against the results passing in params array.  This will return all rows that have a column name with terry in it.  Simalar to a SQL LIKE
 
 ```javascript
 Azureservice.query('todoListTable', {
@@ -237,13 +237,13 @@ Azureservice.query('todoListTable', {
  	params: ['terry']
  	})
 	.then(function(items) {
-		// Assigin the results to a $scope variable 
+		// Assigin the results to a $scope variable
 		$scope.items = items;
-		
+
 	}, function(err) {
 		console.error('There was an error quering Azure ' + err);
 	});
-    
+
 ```
 
 
@@ -268,7 +268,7 @@ Javascript object containing the columns and values to insert in to the database
 **withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request 
+A function that can read and write arbitrary properties or add additional headers to the request
 ```
 
 Returns
@@ -284,12 +284,12 @@ Azureservice.insert('todoListTable', {
  		owner: 'Terry Moore',
  		isFinished: false
  	})
-	.then(function() { 
+	.then(function() {
 		console.log('Insert successful');
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 
@@ -314,7 +314,7 @@ Javascript object containing the columns and values to udpate in to the database
 **withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request 
+A function that can read and write arbitrary properties or add additional headers to the request
 ```
 
 Returns
@@ -333,7 +333,7 @@ Azureservice.update('todoListTable', {
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 Returns
@@ -356,14 +356,14 @@ The Azure table to delete from
 **obj** Required
 
 ```
-Javascript object containing the criteria for rows from the database. 
+Javascript object containing the criteria for rows from the database.
 ```
 
 
 **withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
 
 ````
-A function that can read and write arbitrary properties or add additional headers to the request 
+A function that can read and write arbitrary properties or add additional headers to the request
 ```
 
 Returns
@@ -381,7 +381,7 @@ Azureservice.del('todoListTable', {
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 Azureservice.getAll(tableName, withFilterFn)
@@ -418,7 +418,7 @@ Azureservice.getAll('todoListTable')
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 Azureservice.getById(tableName, id, withFilterFn)
@@ -460,7 +460,7 @@ Azureservice.getById('todoListTable', '5A25CD78-F2D9-413C-81CA-6EC090590AAF')
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 Azureservice.read(tableName, parameters, withFilterFn)
@@ -478,7 +478,7 @@ The Azure table to get all data from
 **parameters** Optional
 ````
 An object of user-defined parameters and values to include in the request URI query string
-Or as a string to pass an oData query filter. 
+Or as a string to pass an oData query filter.
 ````
 
 **withFilterFn** Optional [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/#customizing)
@@ -504,7 +504,7 @@ Azureservice.read('todoListTable',{
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 Example with parameters as an oData filter string
@@ -516,7 +516,7 @@ Azureservice.read('todoListTable', "$filter=name eq 'Test User'")
 	}).catch(function(error) {
 	    console.log(error)
 	})
-    
+
 ```
 
 
@@ -574,7 +574,7 @@ Azureservice.login('google', { id_token: 'qwerty12345...' })
 
 Azureservice.setCurrentUser(userObj)
 =================
-Use this method to set the current user for the MS Client when using custom authentication. 
+Use this method to set the current user for the MS Client when using custom authentication.
 [More information] (http://azure.microsoft.com/en-us/documentation/articles/mobile-services-dotnet-backend-get-started-custom-authentication/)
 
 
@@ -656,7 +656,7 @@ None
 
 Returns
 -----------
-True if there is a current login session 
+True if there is a current login session
 False if there is not
 
 Example
@@ -682,7 +682,7 @@ Parameters:
 The custom API name
 ```
 
-**params** 
+**params**
 
 ````
 An object that contains a set of parameters to send the custom api.
@@ -718,11 +718,11 @@ Azureservice.invokeApi('apiName' {
 	}, function(err) {
 		console.error('Azure Error: ' + err);
 	});
-    
+
 ```
 
 
 
 
 
-***For more information on Windows Azure Mobile service please refer to the*** [Microsoft Azure Mobile Service Documentation] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)	
+***For more information on Windows Azure Mobile service please refer to the*** [Microsoft Azure Mobile Service Documentation] (http://www.windowsazure.com/en-us/documentation/articles/mobile-services-html-how-to-use-client-library/)
