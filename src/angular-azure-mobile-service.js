@@ -19,6 +19,11 @@ angular.module('azure-mobile-service.module', [])
 
             MobileServiceClient = WindowsAzure.MobileServiceClient;
             client = new MobileServiceClient(AzureMobileServiceClient.API_URL, apiKey);
+			
+			var alternateLoginHost = AzureMobileServiceClient.ALTERNATE_LOGIN_HOST;
+            if (alternateLoginHost) {
+                client.alternateLoginHost = alternateLoginHost;
+            }
         };
 
         var setStorage = function() {
